@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env DEBUG=* node temp.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "coverage": "jest --coverage"
   },
   "jest": {
     "testEnvironment": "node"
