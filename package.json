@@ -5,7 +5,11 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env DEBUG=* node temp.js",
-    "test": "tape ./**/*.spec.js | tap-spec"
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "dependencies": {
     "node-fetch": "^1.6.3",
@@ -14,7 +18,6 @@
   "devDependencies": {
     "cross-env": "^3.1.4",
     "debug": "^2.6.0",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.6.3"
+    "jest": "^18.1.0"
   }
 }
