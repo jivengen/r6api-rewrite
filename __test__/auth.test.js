@@ -43,17 +43,27 @@ describe("test", function () {
     });
 
     it("returns correct auth Headers", () => {
-        auth.setCredentials(login.email, login.password)
+        auth.setCredentials(login.email, login.password);
         auth.getAuthHeader()
             .then(headers => {
                 expect(headers["Ubi-AppId"]).toBeDefined();
                 expect(headers["Authorization"]).toContain("Ubi_v1 t=");
             });
-    })
+    });
 
     it("schedules a refresh on successful login", () => {
         auth.setCredentials(login.email, login.password);
         auth.login()
-            .then(() => expect(auth.refreshScheduled()).toBeTruthy());
-    })
+            .then(() => expect(auth._refreshScheduled()).toBeTruthy());
+    });
+
+    it("logs in again if a token expired", () => {
+        auth.setCredentials(login.email, login.password);
+        auth.login()
+            .then(() => {
+                auth._setAuth({ expires: new Date("2000-01-01") });
+                auth.getAuthToken()
+                    .then(res => expect(res).toBeDefined());
+            });
+    });
 });
