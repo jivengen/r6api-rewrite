@@ -4,7 +4,7 @@ const findByName = require("./lib/commands/findByName");
 const getCurrentName = require("./lib/commands/getCurrentName");
 const getLevel = require("./lib/commands/getLevel");
 const getPlaytime = require("./lib/commands/getPlaytime");
-const getRank = require("./lib/commands/getRank");
+const getRanks = require("./lib/commands/getRanks");
 const getStats = require("./lib/commands/getStats");
 
 module.exports.auth = auth;
@@ -14,6 +14,6 @@ module.exports.api = {
     getCurrentName,
     getLevel,
     getPlaytime,
-    getRank,
+    getRanks,
     getStats
 }
