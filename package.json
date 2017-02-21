@@ -13,6 +13,7 @@
     "testEnvironment": "node"
   },
   "dependencies": {
+    "lodash.merge": "^4.6.0",
     "node-fetch": "^1.6.3",
     "r6api": "^1.8.4"
   },

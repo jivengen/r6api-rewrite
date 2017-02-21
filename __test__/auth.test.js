@@ -1,6 +1,5 @@
 const login = require("../test.login");
-
-const Errors = require("../lib/errors/auth");
+const Errors = require("../lib/errors");
 const auth = require("../lib/auth");
 
 describe("test", function () {
@@ -38,23 +37,16 @@ describe("test", function () {
         auth.login()
             .then(function (ubiRes) {
                 auth.getAuthToken()
-                    .then(token => expect(ubiRes.ticket).toEqual(localRes));
-            });
-    });
-
-    it("returns correct auth Headers", () => {
-        auth.setCredentials(login.email, login.password);
-        auth.getAuthHeader()
-            .then(headers => {
-                expect(headers["Ubi-AppId"]).toBeDefined();
-                expect(headers["Authorization"]).toContain("Ubi_v1 t=");
-            });
+                    .then(token => expect(token).toContain(ubiRes.ticket));
+            })
+            .catch(err => expect(err).toBeUndefined())
     });
 
     it("schedules a refresh on successful login", () => {
         auth.setCredentials(login.email, login.password);
         auth.login()
-            .then(() => expect(auth._refreshScheduled()).toBeTruthy());
+            .then(() => expect(auth.refreshScheduled()).toBeTruthy())
+            .catch(err => expect(err).toBeUndefined())
     });
 
     it("logs in again if a token expired", () => {
@@ -64,6 +56,7 @@ describe("test", function () {
                 auth._setAuth({ expires: new Date("2000-01-01") });
                 auth.getAuthToken()
                     .then(res => expect(res).toBeDefined());
-            });
+            })
+            .catch(err => expect(err).toBeUndefined())
     });
 });

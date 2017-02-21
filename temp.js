@@ -1,11 +1,13 @@
-const auth = require("./lib/auth");
+const r6api = require("./index");
 const fixture = require("./test.login");
-const findByName = require("./lib/commands/findByName")
 
-auth.login(fixture.email, fixture.password)
-    .then(() => findByName(["NaCleptic"]))
+r6api.auth.login(fixture.email, fixture.password)   
+    .then(() => r6api.api.findByName(["NaCleptic"]))
     .then(res => {
         console.log(res);
         process.exit(0);
     })
-    .catch(console.error);
+    .catch(err => {
+        console.error(err);
+        process.exit(1);
+    });

@@ -1,4 +1,4 @@
-const Errors = require("../lib/errors/auth");
+const Errors = require("../lib/errors");
 
 describe("auth errors", function() {
     it("extends the base Error class", function () {
