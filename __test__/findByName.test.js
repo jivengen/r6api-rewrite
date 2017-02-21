@@ -11,20 +11,18 @@ const acc = {
 
 describe("test", function () {
     it("can find a single account", () => {
-        auth.login(login.email, login.password)
+        return auth.login(login.email, login.password)
             .then(() => findByName(acc.LaxisSmurf.alias))
             .then(res => {
                 expect(res.length).toBe(1);
                 expect(res[0].id).toBe(acc.LaxisSmurf.id);
-            })
-            .catch(err => expect(err).toBeUndefined())
+            });
     });
     it("can find multiple accounts", () => {
-        auth.login(login.email, login.password)
+        return auth.login(login.email, login.password)
             .then(() => findByName([acc.LaxisSmurf.alias, acc.Muppet.alias]))
             .then(res => {
                 expect(res.length).toBe(2);
-            })
-            .catch(err => expect(err).toBeUndefined())
+            });
     });
 });    
